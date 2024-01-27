@@ -4,24 +4,27 @@ import numpy as np
 from io import BytesIO
 from PIL import Image
 import tensorflow as tf
+from fastapi.middleware.cors import CORSMiddleware
 
 app = FastAPI()
 
+origins = ["http://localhost:3000"]
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
+
 # making a global variable for load the cnn model
-#1 > potato 2 > corn 3 > grapes
-#MODEL = tf.keras.models.load_model("../saved_models/3")
+
 #MODEL = tf.keras.models.load_model("../../Proteger_v1/models/proteger_model")
 MODEL = tf.keras.models.load_model("../../Proteger_v1/models/proteger.h5")
 
 # making the global variable for disease type - class name
-#potato
-#CLASS_NAMES = ["Early Blight", "Late Blight", "Healthy"]
-
-#corn
-#CLASS_NAMES = ["Corn___Cercospora_leaf_spot Gray_leaf_spot", "Corn___Common_rust", "Corn___Northern_Leaf_Blight", "Corn___healthy"]
-
-#CLASS_NAMES = ["Grape___Black_rot", "Grape___Esca_(Black_Measles)", "Grape___Leaf_blight_(Isariopsis_Leaf_Spot)", "Grape___healthy"]
-
 #all-proteger_v1
 CLASS_NAMES = ["Apple___Apple_scab", "Apple___Black_rot", "Apple___Cedar_apple_rust", "Apple___healthy", "Blueberry___healthy", "Cherry___Powdery_mildew", "Cherry___healthy", "Corn___Cercospora_leaf_spot Gray_leaf_spot", "Corn___Common_rust", "Corn___Northern_Leaf_Blight", "Corn___healthy", "Grape___Black_rot", "Grape___Esca_Black_Measles", "Grape___Leaf_blight", "Grape___healthy", "Orange___Citrus_greening", "Peach___Bacterial_spot", "Peach___healthy", "Pepper___Bacterial_spot", "Pepper___healthy", "Potato___Early_blight", "Potato___Late_blight", "Potato___healthy", "Raspberry___healthy", "Soybean___healthy", "Squash___Powdery_mildew", "Strawberry___Leaf_scorch", "Strawberry___healthy", "Tomato___Bacterial_spot", "Tomato___Early_blight", "Tomato___Late_blight", "Tomato___Leaf_Mold", "Tomato___Septoria_leaf_spot", "Tomato___Spider_mites Two-spotted_spider_mite", "Tomato___Target_Spot", "Tomato___Tomato_Yellow_Leaf_Curl_Virus", "Tomato___Tomato_mosaic_virus", "Tomato___healthy"]
 
