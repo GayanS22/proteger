@@ -18,7 +18,7 @@ function FileForm() {
     formData.append('file', file);
 
     try {
-      const endpoint = "http://18.119.235.62/predict";
+      const endpoint = "https://18.119.235.62/predict";
       const response = await fetch(endpoint, {
         method: "POST",
         body: formData,
